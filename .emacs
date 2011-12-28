@@ -202,7 +202,6 @@
  '(whitespace-line ((t (:foreground "#5B4141")))))
 
 (add-to-list 'load-path "~/.emacs.d")
-;;(add-to-list 'load-path "/opt/scala/misc/scala-tool-support/emacs")
 (require 'ffap)
 (require 'vline)
 (require 'col-highlight)
