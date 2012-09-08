@@ -41,21 +41,24 @@
  '(default-tab-width 4 t)
  '(default-truncate-lines t t)
  '(delay-mode-hooks nil t)
+ '(describe-char-unidata-list (quote (name old-name general-category decomposition numeric-value iso-10646-comment)))
  '(desktop-save-mode nil)
- '(dict-databases (quote ("en-ru" "ru-en" "latrus" "mueller7")))
- '(dict-servers (quote ("localhost" "dictd.xdsl.by" "dict.dvo.ru")))
+ '(dict-databases (quote ("mueller7" "moby-thesaurus")))
+ '(dict-servers (quote ("localhost")))
  '(dict-strategies (quote (list ".")))
  '(display-time-24hr-format t)
  '(ecb-layout-name "left9")
  '(ecb-layout-window-sizes (quote (("left9" (ecb-methods-buffer-name 0.2251655629139073 . 0.9772727272727273)))))
- '(ecb-options-version "2.40")
  '(ecb-tip-of-the-day nil)
  '(enable-completion nil)
  '(enable-recursive-minibuffers nil)
  '(eshell-save-history-on-exit nil)
+ '(ff-paths-install t nil (ff-paths))
+ '(ff-paths-use-ffap nil nil (ff-paths))
  '(follow-auto t)
  '(font-latex-fontify-sectioning (quote color))
  '(font-use-system-font t)
+ '(framepop-enable nil nil (framepop))
  '(fringe-mode (quote (5 . 5)) nil (fringe))
  '(glasses-original-separator "˙")
  '(glasses-separate-parentheses-p nil)
@@ -82,16 +85,18 @@
  '(inhibit-startup-screen t)
  '(initial-major-mode (quote org-mode))
  '(initial-scratch-message "")
+ '(interpropgram-paste-function (quote x-cut-buffer-or-selection-value))
  '(js-auto-indent-flag nil)
- '(js-enabled-frameworks (quote (javascript prototype extjs)))
+ '(js-enabled-frameworks (quote (javascript extjs)))
  '(js-expr-indent-offset 4)
  '(js-flat-functions nil)
+ '(kill-do-not-save-duplicates t)
  '(lcomp-enable t nil (lcomp))
  '(lcomp-mode t)
  '(lua-indent-level 4)
  '(major-mode (quote org-mode))
  '(make-backup-files nil)
- '(menu-bar-mode t)
+ '(menu-bar-mode nil)
  '(minibuffer-depth-indicate-mode t)
  '(miniedit-install-p t nil (miniedit))
  '(miniedit-show-help-p nil)
@@ -116,23 +121,20 @@
  '(org-export-with-toc nil)
  '(org-file-apps (quote ((auto-mode . emacs) ("\\.x?html?\\'" . default) ("\\.pdf\\'" . default))))
  '(org-imenu-depth 4)
- '(org-mobile-agendas (quote all))
- '(org-mobile-directory "~/Dropbox/MobileOrg")
- '(org-mobile-files (quote (org-agenda-files "~/Ubuntu One/Org")))
- '(org-mobile-inbox-for-pull "~/Ubuntu One/Org/flagged.org")
- '(org-mobile-use-encryption t)
  '(org-support-shift-select t)
  '(org-yank-adjusted-subtrees t)
  '(partial-completion-mode nil)
  '(pgg-default-user-id "Serguei Mikhailov")
  '(pgg-gpg-recipient-argument "--remote-user")
- '(python-command "python3" t)
+ '(python-command "python" t)
  '(python-guess-indent nil)
  '(python-indent 4)
- '(python-python-command "python3")
+ '(python-python-command "python")
  '(recentf-mode 1)
+ '(remember-data-file "~/Ubuntu One/Org/remember.org")
  '(rfcview-rfc-location-pattern (quote ("/usr/share/doc/RFC/links/rfc%s.txt.gz" "/ftp@ftp.rfc-editor.org:/in-notes/rfc%s.txt")))
  '(save-completions-flag nil)
+ '(save-interprogram-paste-before-kill t)
  '(scheme-program-name "guile")
  '(scroll-bar-mode nil)
  '(scroll-step 1)
@@ -141,22 +143,23 @@
  '(ses-mode-hook (quote (lambda nil (set-variable (quote before-save-hook) nil t))))
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
- '(size-indication-mode t)
- '(speedbar-frame-parameters (quote ((minibuffer) (width . 72) (menu-bar-lines . 0) (tool-bar-lines . 0) (unsplittable . t) (left-fringe . 0) (right-fringe . 0))))
- '(speedbar-indentation-width 4 t)
+ '(speedbar-frame-parameters (quote ((minibuffer) (menu-bar-line . 0) (tool-bar-lines . 0) (unsplittable . t) (left-fringe . 0) (right-fringe . 0))))
+ '(speedbar-indentation-width 4)
  '(speedbar-show-unknown-files t)
  '(speedbar-use-images t)
  '(sql-sqlite-program "sqlite3")
+ '(tab-always-indent (quote complete))
  '(tab-stop-list (number-sequence 4 400 4))
  '(tab-width 4)
- '(time-stamp-format "%Y-%m-%d %H:%M")
+ '(time-stamp-format "%Y-%:m-%:d %:H:%:M")
  '(tmm-shortcut-style (quote (downcase upcase)))
  '(tool-bar-mode nil)
+ '(tramp-default-method "ssh")
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(url-cookie-multiple-line nil)
  '(url-mime-language-string "ru,en")
  '(url-personal-mail-address "serg@mikhailoff.com")
- '(w3m-default-save-directory "~/desktop")
+ '(w3m-default-save-directory "~/Desktop")
  '(w3m-do-cleanup-temp-files t)
  '(w3m-form-use-textarea-backup nil)
  '(w3m-pop-up-windows nil)
@@ -179,7 +182,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:height 100 :width normal :weight normal :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :background "#F0EAE4" :fontset "Monospace"))))
+ '(default ((t (:weight normal :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :background "#F0EAE4" :fontset "Monospace"))))
  '(cursor ((t (:background "#71046B"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "#AE43AB"))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background light)) (:foreground "#838B83"))))
@@ -210,13 +213,11 @@
 (require 'dired+)
 (require 'autopair)
 (require 'auto-pair+)
-(require 'wrap-region)
 
 (prefer-coding-system 'cp1251-dos)
 (prefer-coding-system 'utf-8-dos)
 (prefer-coding-system 'utf-8-unix)
 
-(setq tramp-default-method "ssh")
 (fset 'yes-or-no-p 'y-or-n-p)
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
@@ -225,18 +226,17 @@
 (put 'scroll-left 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
-(setq interpropgram-paste-function 'x-cut-buffer-or-selection-value)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'find-file-hook 'autopair-mode)
 (setq-default dired-omit-files-p t)
 (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 (toggle-dired-find-file-reuse-dir 1)
-(org-remember-insinuate)
 
-(add-to-list 'auto-mode-alist '("\\.tpl$" . html-mode))
 (autoload 'eimp-mode "eimp" "Emacs Image Manipulation Package." t)
+(add-to-list 'auto-mode-alist '("\\.tpl$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
-(add-hook 'php-mode-hook 'wisent-java-default-setup)
+(add-to-list 'file-coding-system-alist (cons "fedorast"  'cp1251-dos))
 
 (add-to-list 'ido-ignore-buffers "*Messages*")
 (add-to-list 'ido-ignore-buffers "*Directory*")
@@ -260,7 +260,8 @@
    (string-match "output\\*$" str)
    (string-match "compilation" str)
    (string-match "^\\*TeX silent\\*$" str)))
-(defun next-user-buffer () ;; TODO: заменить cyclebuffer?
+;; todo: repalce with cyclebuffer.
+(defun next-user-buffer ()
   "Switch to the next user buffer in cyclic order."
   (interactive)
   (next-buffer)
@@ -317,7 +318,7 @@
   (yank))
 
 (defun my-void ()
-  "Do nothing. TODO: Заменить встроенной функцией? Какой?"
+  "Do nothing. TODO: Find a built-in."
   (interactive))
 
 ;; http://www.emacswiki.org/emacs/dired-extension.el
@@ -326,7 +327,6 @@
   (interactive)
   (gnome-open-file (dired-get-file-for-visit)))
 
-;; TODO: Получить это снаружи, от системы. 
 (defun x-compose-key (seq)
   "External compose key"
   (interactive "M:")
@@ -338,7 +338,9 @@
     ((string= seq "<<") "«")
     ((string= seq ">>") "»")
     ((string= seq ".=") "•")
-    (t seq))))
+    (t (shell-command-to-string
+        (concat "xte 'key Multi_key' 'str " seq "'"))
+       ))))
 
 (defun cycle-input-method ()
   "One of custom input methods"
@@ -360,7 +362,7 @@
   "Gnome opens the specified file."
   (interactive "GFile to open: ")
   (let ((process-connection-type nil))
-    (start-process "" nil "gnome-open"
+    (start-process "" nil "xdg-open"
                    (or (ffap-url-p filename)
                        (expand-file-name filename)))))
 
@@ -392,8 +394,9 @@
       (kill-region (point-marker) (mark-marker) arg)
     (kill-whole-line arg)))
 
+;; Todo: разверну положение; как в vim.
 (defun my-join-region ()
-  "Join lines in the region."
+  "Join lines of the region."
   (interactive)
   (if mark-active
       (fill-delete-newlines
@@ -403,23 +406,6 @@
        nil
        nil)
     (delete-indentation)))
-
-(defvar my-toggle-autowrap 1)
-(defun my-toggle-autowrap ()
-  "Toggle autopair and wrap-region modes"
-  (interactive)
-  (cond ((eq my-toggle-autowrap 0)
-         (autopair-mode 1)
-         (wrap-region-mode 0)
-         (setq my-toggle-autowrap 1))
-        ((eq my-toggle-autowrap 1)
-         (autopair-mode 0)
-         (wrap-region-mode 1)
-         (setq my-toggle-autowrap 2))
-        (t
-         (autopair-mode 0)
-         (wrap-region-mode 0)
-         (setq my-toggle-autowrap 0))))
 
 ;; http://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer
 ;; we want dired not to make always a new buffer if visiting a directory
@@ -442,7 +428,7 @@
      "Run Dired on parent directory of current directory."
      (interactive "P")
      (let* ((dir (dired-current-directory))
-     	    (orig (current-buffer))
+           (orig (current-buffer))
      	    (up (file-name-directory (directory-file-name dir))))
        (or (dired-goto-file (directory-file-name dir))
      	   ;; Only try dired-goto-subdir if buffer has more than one dir.
@@ -453,12 +439,21 @@
      	     (dired up)
      	     (dired-goto-file dir))))))
 
+;; Работает только если меня раскладку левым альт-спейс.
+(defun non-x-toggle-input-method ()
+  (interactive)
+  ;; (when (string-equal "en" (shell-command-to-string "~/Dropbox/Script/get-keyboard-layout.sh"))
+  ;;   (set-input-method nil)
+  (shell-command-to-string "~/Dropbox/Script/set-kb-ru.sh")
+  (toggle-input-method))
+
 ;; http://puzan-linux.blogspot.com/2009/08/emacs-daemon.html
 (defun my-kill-emacs ()
+  "Some workarounds"
   (interactive)
-  (save-some-buffers)
-  (desktop-save-in-desktop-dir)
   (cd "~")
+  (save-some-buffers)
+  ; (desktop-save-in-desktop-dir)
   (kill-emacs))
 
 ;; http://www.emacswiki.org/emacs/MoveRegion
@@ -478,7 +473,7 @@
   (interactive "r\np")
   (move-region start end (if (null n) -1 (- n))))
 
-;; TODO: Учитывать конец строки.
+;; TODO: Учитывать строки.
 (defun move-region-down (start end n)
   "Move the current line down by N lines."
   (interactive "r\np")
@@ -500,13 +495,11 @@
 (global-unset-key [(menu)])
 
 (global-set-key [(menu) (w)] 'my-mark-current-word)
-(global-set-key [(menu) (m)] 'imenu)
 (global-set-key [(menu) (l)] 'jao-copy-line)
-(global-set-key [(menu) (shift l)] 'my-mark-line)
+(global-set-key [(menu) (m)] 'my-mark-line)
 (global-set-key [(menu) (y)] 'cua-copy-region)
 (global-set-key [(menu) (d)] 'my-duplicate-line)
 (global-set-key [(menu) (j)] 'my-join-region)
-(global-set-key [(menu) (r)] 'org-remember)
 (global-set-key [(menu) (b)] 'w3m-open-ffap)
 (global-set-key [(menu) (f)] 'ffap)
 (global-set-key [(menu) (s)] 'speedbar)
@@ -517,46 +510,61 @@
 (global-set-key [(menu) (g)] 'gnome-open-ffap)
 (global-set-key [(menu) (o)] 'org-open-at-point-global)
 
-(global-set-key [(menu) (,)] 'my-toggle-autowrap)
+(global-set-key [(menu) (,)] 'autopair-mode)
 (global-set-key [(menu) (\\)] 'column-highlight-mode)
 (global-set-key [(menu) (\ )] 'menu-bar-open)
+(global-set-key [(menu) (\/)] 'imenu)
 
-(global-set-key [(menu) (menu) (c)] 'clipper-create)
-(global-set-key [(menu) (menu) (i)] 'clipper-insert)
-(global-set-key [(menu) (menu) (e)] 'clipper-edit-clip)
 (global-set-key [(menu) (menu) (p)] 'my-password-generator)
 (global-set-key [(menu) (menu) (t)] 'my-current-time)
-(global-set-key [(menu) (menu) (k)] 'x-compose-key)
-(global-set-key [(menu) (menu) (l)] 'org-insert-link-global)
+(global-set-key [(menu) (Multi_key)] 'x-compose-key)
+
+(global-set-key [(menu) (.) (.) (l)] 'org-insert-link-global)
 
 (global-set-key [(menu) (menu) (g)] 'grep-find)
 (global-set-key [(menu) (menu) (b)] 'w3m-goto-url)
 (global-set-key [(menu) (menu) (d)] 'dired-at-point)
 (global-set-key [(menu) (menu) (r)] 'revert-buffer)
-(global-set-key [(menu) (menu) (\ )] 'menu-bar-mode)
+
+(global-set-key [(menu) (.) (\ )] 'menu-bar-mode)
+
+(global-set-key [(menu) (.) (.) (c)] 'clipper-create)
+(global-set-key [(menu) (.) (.) (i)] 'clipper-insert)
+(global-set-key [(menu) (.) (.) (e)] 'clipper-edit-clip)
 
 (global-set-key [(menu) (.) (.) (w)] '(lambda () "Windows-1251" (interactive) (revert-buffer-with-coding-system 'cp1251-dos)))
 (global-set-key [(menu) (.) (.) (d)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-dos)))
 (global-set-key [(menu) (.) (.) (u)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-unix)))
 
-(global-set-key [(menu) (.) (c)] 'ecb-minor-mode)
+(global-set-key [(menu) (.) (r)] 'org-remember)
 (global-set-key [(menu) (.) (d)] '(lambda () "StarDict Console" (interactive) (comint-run "sdcv")))
 (global-set-key [(menu) (.) (g)] 'glasses-mode)
 (global-set-key [(menu) (.) (f)] 'flymake-mode)
 (global-set-key [(menu) (.) (a)] 'artist-mode)
 (global-set-key [(menu) (.) (w)] 'whitespace-mode)
-(global-set-key [(menu) (.) (o)] 'org-mode)
-(global-set-key [(menu) (.) (shift s)] 'orgstruct-mode)
-(global-set-key [(menu) (.) (shift t)] 'orgtbl-mode)
 (global-set-key [(menu) (.) (t)] 'text-mode)
 (global-set-key [(menu) (.) (h)] 'html-mode)
 (global-set-key [(menu) (.) (l)] 'emacs-lisp-mode)
-(global-set-key [(menu) (.) (p)] 'python-mode)
-(global-set-key [(menu) (.) (shift p)] 'php-mode)
-(global-set-key [(menu) (.) (shift c)] 'css-mode)
-(global-set-key [(menu) (.) (shift j)] 'js-mode)
+(global-set-key [(menu) (.) (p)] 'php-mode)
+(global-set-key [(menu) (.) (c)] 'css-mode)
+(global-set-key [(menu) (.) (j)] 'js-mode)
+(global-set-key [(menu) (.) (o)] 'org-mode)
+
+(global-set-key [(menu) (.) (.) (r)] 'rot13-region)
+(global-set-key [(menu) (.) (.) (s)] 'orgstruct-mode)
+(global-set-key [(menu) (.) (.) (t)] 'orgtbl-mode)
+
+(global-unset-key [(XF86LaunchA)]) ;; = Apple KB F3 = Win + Menu
+(global-unset-key [(XF86LaunchB)]) ;; = Apple KB F4 = Win
 
 (global-unset-key [(super)])
+(global-set-key [Multi_key] 'my-void)
+(global-set-key [(super menu)] 'my-void)
+(global-set-key [(super f10)] 'my-void)
+(global-set-key [(super f11)] (lambda () (interactive) (shell-command-to-string "~/Dropbox/Script/fullscreen-emacs.sh")))
+
+(global-set-key [(meta \ )] 'non-x-toggle-input-method)
+(global-set-key [(super \ )] 'cycle-input-method)
 
 (global-set-key [(super h)] 'windmove-left)
 (global-set-key [(super j)] 'windmove-down)
@@ -574,14 +582,10 @@
 (global-set-key [(control k)] 'my-kill-line-or-region)
 (global-set-key [(meta k)] 'kill-line)
 (global-set-key [(control x) (c)] 'my-kill-emacs)
-
-(global-set-key [Multi_key] 'my-void)
-(global-set-key [(shift Multi_key)] 'toggle-input-method)
-(global-set-key [(super \ )] 'toggle-input-method)
-(global-set-key [(control shift Multi_key)] 'toggle-input-method)
-(global-set-key [(meta Multi_key)] 'cycle-input-method)
-(global-set-key [(super menu)] 'my-void)
+(global-set-key [(meta shift \ )] 'just-one-space)
 (global-set-key [(mouse-3)] 'mouse-popup-menubar)
 
-(cd "~")
-;; (server-start t)
+(shell-command-to-string "~/Dropbox/Script/fullsize-emacs.sh")
+
+;; # Todo
+;; + fix the speedbar
