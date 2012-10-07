@@ -394,7 +394,7 @@
       (kill-region (point-marker) (mark-marker) arg)
     (kill-whole-line arg)))
 
-;; Todo: разверну положение; как в vim.
+;; Todo: flip the direction as in the vim.
 (defun my-join-region ()
   "Join lines of the region."
   (interactive)
@@ -428,7 +428,7 @@
      "Run Dired on parent directory of current directory."
      (interactive "P")
      (let* ((dir (dired-current-directory))
-           (orig (current-buffer))
+             (orig (current-buffer))
      	    (up (file-name-directory (directory-file-name dir))))
        (or (dired-goto-file (directory-file-name dir))
      	   ;; Only try dired-goto-subdir if buffer has more than one dir.
@@ -439,21 +439,19 @@
      	     (dired up)
      	     (dired-goto-file dir))))))
 
-;; Работает только если меня раскладку левым альт-спейс.
+;; Works normal with left alt + space only.
 (defun non-x-toggle-input-method ()
   (interactive)
-  ;; (when (string-equal "en" (shell-command-to-string "~/Dropbox/Script/get-keyboard-layout.sh"))
-  ;;   (set-input-method nil)
   (shell-command-to-string "~/Dropbox/Script/set-kb-ru.sh")
   (toggle-input-method))
 
 ;; http://puzan-linux.blogspot.com/2009/08/emacs-daemon.html
+;; Bug: hangs on broken ssh session.
 (defun my-kill-emacs ()
   "Some workarounds"
   (interactive)
   (cd "~")
   (save-some-buffers)
-  ; (desktop-save-in-desktop-dir)
   (kill-emacs))
 
 ;; http://www.emacswiki.org/emacs/MoveRegion
@@ -468,12 +466,12 @@
           (setq deactivate-mark nil)
           (set-mark start)))))
 
+; Todo: Use current line when no region selected.
 (defun move-region-up (start end n)
   "Move the current line up by N lines."
   (interactive "r\np")
   (move-region start end (if (null n) -1 (- n))))
 
-;; TODO: Учитывать строки.
 (defun move-region-down (start end n)
   "Move the current line down by N lines."
   (interactive "r\np")
@@ -497,12 +495,12 @@
 (global-set-key [(menu) (w)] 'my-mark-current-word)
 (global-set-key [(menu) (l)] 'jao-copy-line)
 (global-set-key [(menu) (m)] 'my-mark-line)
-(global-set-key [(menu) (y)] 'cua-copy-region)
+(global-set-key [(menu) (c)] 'cua-copy-region)
 (global-set-key [(menu) (d)] 'my-duplicate-line)
 (global-set-key [(menu) (j)] 'my-join-region)
 (global-set-key [(menu) (b)] 'w3m-open-ffap)
 (global-set-key [(menu) (f)] 'ffap)
-(global-set-key [(menu) (s)] 'speedbar)
+(global-set-key [(menu) (s)] 'speedbar) ;; todo: fix the speedbar
 (global-set-key [(menu) (t)] 'toggle-truncate-lines)
 (global-set-key [(menu) (n)] 'global-linum-mode)
 (global-set-key [(menu) (i)] 'ibuffer)
@@ -510,38 +508,39 @@
 (global-set-key [(menu) (g)] 'gnome-open-ffap)
 (global-set-key [(menu) (o)] 'org-open-at-point-global)
 
-(global-set-key [(menu) (,)] 'autopair-mode)
+(global-set-key [(menu) (\ )] 'just-one-space)
 (global-set-key [(menu) (\\)] 'column-highlight-mode)
-(global-set-key [(menu) (\ )] 'menu-bar-open)
 (global-set-key [(menu) (\/)] 'imenu)
-
-(global-set-key [(menu) (menu) (p)] 'my-password-generator)
-(global-set-key [(menu) (menu) (t)] 'my-current-time)
 (global-set-key [(menu) (Multi_key)] 'x-compose-key)
 
-(global-set-key [(menu) (.) (.) (l)] 'org-insert-link-global)
-
+(global-set-key [(menu) (menu) (\ )] 'menu-bar-mode)
+(global-set-key [(menu) (menu) (p)] 'my-password-generator)
+(global-set-key [(menu) (menu) (t)] 'my-current-time)
 (global-set-key [(menu) (menu) (g)] 'grep-find)
 (global-set-key [(menu) (menu) (b)] 'w3m-goto-url)
 (global-set-key [(menu) (menu) (d)] 'dired-at-point)
 (global-set-key [(menu) (menu) (r)] 'revert-buffer)
 
-(global-set-key [(menu) (.) (\ )] 'menu-bar-mode)
+(global-set-key [(menu) (.) (.) (w)] '(lambda () "Windows-1251" (interactive) (revert-buffer-with-coding-system 'cp1251-dos)))
+(global-set-key [(menu) (.) (.) (d)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-dos)))
+(global-set-key [(menu) (.) (.) (u)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-unix)))
 
+(global-set-key [(menu) (.) (.) (p)] 'autopair-mode)
 (global-set-key [(menu) (.) (.) (c)] 'clipper-create)
 (global-set-key [(menu) (.) (.) (i)] 'clipper-insert)
 (global-set-key [(menu) (.) (.) (e)] 'clipper-edit-clip)
 
-(global-set-key [(menu) (.) (.) (w)] '(lambda () "Windows-1251" (interactive) (revert-buffer-with-coding-system 'cp1251-dos)))
-(global-set-key [(menu) (.) (.) (d)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-dos)))
-(global-set-key [(menu) (.) (.) (u)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-unix)))
+(global-set-key [(menu) (.) (.) (s)] 'orgstruct-mode)
+(global-set-key [(menu) (.) (.) (t)] 'orgtbl-mode)
+(global-set-key [(menu) (.) (.) (r)] 'rot13-region)
 
 (global-set-key [(menu) (.) (r)] 'org-remember)
 (global-set-key [(menu) (.) (d)] '(lambda () "StarDict Console" (interactive) (comint-run "sdcv")))
 (global-set-key [(menu) (.) (g)] 'glasses-mode)
 (global-set-key [(menu) (.) (f)] 'flymake-mode)
-(global-set-key [(menu) (.) (a)] 'artist-mode)
 (global-set-key [(menu) (.) (w)] 'whitespace-mode)
+
+(global-set-key [(menu) (.) (a)] 'artist-mode)
 (global-set-key [(menu) (.) (t)] 'text-mode)
 (global-set-key [(menu) (.) (h)] 'html-mode)
 (global-set-key [(menu) (.) (l)] 'emacs-lisp-mode)
@@ -550,10 +549,6 @@
 (global-set-key [(menu) (.) (j)] 'js-mode)
 (global-set-key [(menu) (.) (o)] 'org-mode)
 
-(global-set-key [(menu) (.) (.) (r)] 'rot13-region)
-(global-set-key [(menu) (.) (.) (s)] 'orgstruct-mode)
-(global-set-key [(menu) (.) (.) (t)] 'orgtbl-mode)
-
 (global-unset-key [(XF86LaunchA)]) ;; = Apple KB F3 = Win + Menu
 (global-unset-key [(XF86LaunchB)]) ;; = Apple KB F4 = Win
 
@@ -561,7 +556,7 @@
 (global-set-key [Multi_key] 'my-void)
 (global-set-key [(super menu)] 'my-void)
 (global-set-key [(super f10)] 'my-void)
-(global-set-key [(super f11)] (lambda () (interactive) (shell-command-to-string "~/Dropbox/Script/fullscreen-emacs.sh")))
+(global-set-key [(super f11)] (lambda () (interactive) (message (shell-command-to-string "~/Dropbox/Script/fullscreen-emacs.sh"))))
 
 (global-set-key [(meta \ )] 'non-x-toggle-input-method)
 (global-set-key [(super \ )] 'cycle-input-method)
@@ -582,10 +577,6 @@
 (global-set-key [(control k)] 'my-kill-line-or-region)
 (global-set-key [(meta k)] 'kill-line)
 (global-set-key [(control x) (c)] 'my-kill-emacs)
-(global-set-key [(meta shift \ )] 'just-one-space)
 (global-set-key [(mouse-3)] 'mouse-popup-menubar)
 
 (shell-command-to-string "~/Dropbox/Script/fullsize-emacs.sh")
-
-;; # Todo
-;; + fix the speedbar
