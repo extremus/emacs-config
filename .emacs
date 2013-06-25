@@ -1,8 +1,6 @@
+; https://github.com/extremus/emacs-config
+
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(PC-meta-flag nil)
  '(TeX-DVI-via-PDFTeX t)
  '(TeX-PDF-mode t)
@@ -49,6 +47,7 @@
  '(display-time-24hr-format t)
  '(ecb-layout-name "left9")
  '(ecb-layout-window-sizes (quote (("left9" (ecb-methods-buffer-name 0.2251655629139073 . 0.9772727272727273)))))
+ '(ecb-options-version "2.40")
  '(ecb-tip-of-the-day nil)
  '(enable-completion nil)
  '(enable-recursive-minibuffers nil)
@@ -57,7 +56,6 @@
  '(ff-paths-use-ffap nil nil (ff-paths))
  '(follow-auto t)
  '(font-latex-fontify-sectioning (quote color))
- '(font-use-system-font t)
  '(framepop-enable nil nil (framepop))
  '(fringe-mode (quote (5 . 5)) nil (fringe))
  '(glasses-original-separator "˙")
@@ -124,7 +122,7 @@
  '(org-support-shift-select t)
  '(org-yank-adjusted-subtrees t)
  '(partial-completion-mode nil)
- '(pgg-default-user-id "Serguei Mikhailov")
+ '(pgg-default-user-id "Sergey Mikhailov")
  '(pgg-gpg-recipient-argument "--remote-user")
  '(python-command "python" t)
  '(python-guess-indent nil)
@@ -143,7 +141,6 @@
  '(ses-mode-hook (quote (lambda nil (set-variable (quote before-save-hook) nil t))))
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
- '(speedbar-frame-parameters (quote ((minibuffer) (menu-bar-line . 0) (tool-bar-lines . 0) (unsplittable . t) (left-fringe . 0) (right-fringe . 0))))
  '(speedbar-indentation-width 4)
  '(speedbar-show-unknown-files t)
  '(speedbar-use-images t)
@@ -178,11 +175,7 @@
  '(yas/dont-activate nil t))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:weight normal :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :background "#F0EAE4" :fontset "Monospace"))))
+ '(default ((t (:stipple nil :background "#F0EAE4" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
  '(cursor ((t (:background "#71046B"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "#AE43AB"))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background light)) (:foreground "#838B83"))))
@@ -205,6 +198,7 @@
  '(whitespace-line ((t (:foreground "#5B4141")))))
 
 (add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/php-mode-master")
 (require 'ffap)
 (require 'vline)
 (require 'col-highlight)
@@ -213,6 +207,7 @@
 (require 'dired+)
 (require 'autopair)
 (require 'auto-pair+)
+(require 'php-mode)
 
 (prefer-coding-system 'cp1251-dos)
 (prefer-coding-system 'utf-8-dos)
@@ -234,9 +229,13 @@
 
 (autoload 'eimp-mode "eimp" "Emacs Image Manipulation Package." t)
 (add-to-list 'auto-mode-alist '("\\.tpl$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.twig$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.ino$" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . javascript-mode))
 
 (add-to-list 'file-coding-system-alist (cons "fedorast"  'cp1251-dos))
+(add-to-list 'file-coding-system-alist (cons "ortddruz"  'cp1251-dos))
 
 (add-to-list 'ido-ignore-buffers "*Messages*")
 (add-to-list 'ido-ignore-buffers "*Directory*")
@@ -394,7 +393,7 @@
       (kill-region (point-marker) (mark-marker) arg)
     (kill-whole-line arg)))
 
-;; Todo: flip the direction as in the vim.
+;; Todo: flip the direction as in vim.
 (defun my-join-region ()
   "Join lines of the region."
   (interactive)
@@ -428,7 +427,7 @@
      "Run Dired on parent directory of current directory."
      (interactive "P")
      (let* ((dir (dired-current-directory))
-             (orig (current-buffer))
+     	    (orig (current-buffer))
      	    (up (file-name-directory (directory-file-name dir))))
        (or (dired-goto-file (directory-file-name dir))
      	   ;; Only try dired-goto-subdir if buffer has more than one dir.
@@ -482,6 +481,15 @@
   (interactive)
   (insert (format-time-string "%Y-%m-%d %H:%M")))
 
+(defun my-fullscreen ()
+  "Fullscreen workaround"
+  (interactive)
+  (message (shell-command-to-string "~/Dropbox/Script/fullscreen-emacs.sh")))
+
+(defun my-fullsize ()
+  "Fullsize workaround"
+  (shell-command-to-string "~/Dropbox/Script/fullsize-emacs.sh"))
+
 (global-set-key [(meta up)] 'move-region-up)
 (global-set-key [(meta down)] 'move-region-down)
 
@@ -521,6 +529,8 @@
 (global-set-key [(menu) (menu) (d)] 'dired-at-point)
 (global-set-key [(menu) (menu) (r)] 'revert-buffer)
 
+(global-set-key [(menu) (.) (.) (r)] 'rot13-region)
+
 (global-set-key [(menu) (.) (.) (w)] '(lambda () "Windows-1251" (interactive) (revert-buffer-with-coding-system 'cp1251-dos)))
 (global-set-key [(menu) (.) (.) (d)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-dos)))
 (global-set-key [(menu) (.) (.) (u)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-unix)))
@@ -529,14 +539,11 @@
 (global-set-key [(menu) (.) (.) (c)] 'clipper-create)
 (global-set-key [(menu) (.) (.) (i)] 'clipper-insert)
 (global-set-key [(menu) (.) (.) (e)] 'clipper-edit-clip)
-
 (global-set-key [(menu) (.) (.) (s)] 'orgstruct-mode)
 (global-set-key [(menu) (.) (.) (t)] 'orgtbl-mode)
-(global-set-key [(menu) (.) (.) (r)] 'rot13-region)
-
 (global-set-key [(menu) (.) (r)] 'org-remember)
+
 (global-set-key [(menu) (.) (d)] '(lambda () "StarDict Console" (interactive) (comint-run "sdcv")))
-(global-set-key [(menu) (.) (g)] 'glasses-mode)
 (global-set-key [(menu) (.) (f)] 'flymake-mode)
 (global-set-key [(menu) (.) (w)] 'whitespace-mode)
 
@@ -549,14 +556,14 @@
 (global-set-key [(menu) (.) (j)] 'js-mode)
 (global-set-key [(menu) (.) (o)] 'org-mode)
 
-(global-unset-key [(XF86LaunchA)]) ;; = Apple KB F3 = Win + Menu
-(global-unset-key [(XF86LaunchB)]) ;; = Apple KB F4 = Win
+(global-unset-key [(XF86LaunchA)]) ;; Apple keyboard F3 = Win + Menu
+(global-unset-key [(XF86LaunchB)]) ;; Apple keyboard F4 = Win
 
 (global-unset-key [(super)])
 (global-set-key [Multi_key] 'my-void)
 (global-set-key [(super menu)] 'my-void)
 (global-set-key [(super f10)] 'my-void)
-(global-set-key [(super f11)] (lambda () (interactive) (message (shell-command-to-string "~/Dropbox/Script/fullscreen-emacs.sh"))))
+(global-set-key [(super f11)] 'my-fullscreen)
 
 (global-set-key [(meta \ )] 'non-x-toggle-input-method)
 (global-set-key [(super \ )] 'cycle-input-method)
@@ -579,4 +586,4 @@
 (global-set-key [(control x) (c)] 'my-kill-emacs)
 (global-set-key [(mouse-3)] 'mouse-popup-menubar)
 
-(shell-command-to-string "~/Dropbox/Script/fullsize-emacs.sh")
+(my-fullsize)
