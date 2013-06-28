@@ -1,5 +1,4 @@
-; https://github.com/extremus/emacs-config
-
+;; https://github.com/extremus/emacs-config
 (custom-set-variables
  '(PC-meta-flag nil)
  '(TeX-DVI-via-PDFTeX t)
@@ -52,6 +51,7 @@
  '(enable-completion nil)
  '(enable-recursive-minibuffers nil)
  '(eshell-save-history-on-exit nil)
+ '(explicit-shell-file-name "/bin/bash")
  '(ff-paths-install t nil (ff-paths))
  '(ff-paths-use-ffap nil nil (ff-paths))
  '(follow-auto t)
@@ -106,7 +106,7 @@
  '(org-attach-method (quote ln))
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item))))
  '(org-completion-use-ido t)
- '(org-directory "~/Ubuntu One/Org")
+ '(org-directory "~/Dropbox/Org")
  '(org-drawers (quote ("PROPERTIES" "CLOCK" "LOGBOOK" "HIDDEN")))
  '(org-empty-line-terminates-plain-lists t)
  '(org-export-author-info nil)
@@ -129,7 +129,7 @@
  '(python-indent 4)
  '(python-python-command "python")
  '(recentf-mode 1)
- '(remember-data-file "~/Ubuntu One/Org/remember.org")
+ '(remember-data-file "~/Dropbox/Org/remember.org")
  '(rfcview-rfc-location-pattern (quote ("/usr/share/doc/RFC/links/rfc%s.txt.gz" "/ftp@ftp.rfc-editor.org:/in-notes/rfc%s.txt")))
  '(save-completions-flag nil)
  '(save-interprogram-paste-before-kill t)
@@ -169,11 +169,12 @@
  '(w3m-use-tab nil)
  '(w3m-use-toolbar t)
  '(whitespace-global-modes nil)
- '(whitespace-style (quote (tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)))
+ '(whitespace-style (quote (face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)))
  '(woman-use-own-frame nil)
  '(x-select-enable-clipboard t)
  '(yas/dont-activate nil t))
 
+;; https://github.com/extremus/emacs-config/issues/1 ;; --color=never -nw
 (custom-set-faces
  '(default ((t (:stipple nil :background "#F0EAE4" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
  '(cursor ((t (:background "#71046B"))))
@@ -195,10 +196,17 @@
  '(nxml-delimiter ((t (:foreground "#404040"))) t)
  '(nxml-glyph ((t (:background "lightgrey" :foreground "black"))))
  '(region ((t (:background "#EBBD9D"))))
- '(whitespace-line ((t (:foreground "#5B4141")))))
+ '(whitespace-empty ((t (:foreground "gray70"))))
+ '(whitespace-indentation ((t (:foreground "gray70"))))
+ '(whitespace-line ((t (:foreground "#5B4141"))))
+ '(whitespace-newline ((t (:foreground "gray70"))))
+ '(whitespace-space ((t (:foreground "gray70"))))
+ '(whitespace-tab ((t (:foreground "gray70" :background "white"))))
+ '(whitespace-trailing ((t (:foreground "gray70" :background "white")))))
 
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/php-mode-master")
+
 (require 'ffap)
 (require 'vline)
 (require 'col-highlight)
@@ -228,6 +236,7 @@
 (toggle-dired-find-file-reuse-dir 1)
 
 (autoload 'eimp-mode "eimp" "Emacs Image Manipulation Package." t)
+
 (add-to-list 'auto-mode-alist '("\\.tpl$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.twig$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
@@ -259,7 +268,8 @@
    (string-match "output\\*$" str)
    (string-match "compilation" str)
    (string-match "^\\*TeX silent\\*$" str)))
-;; todo: repalce with cyclebuffer.
+
+;; todo: repalce with cyclebuffer?
 (defun next-user-buffer ()
   "Switch to the next user buffer in cyclic order."
   (interactive)
@@ -316,8 +326,9 @@
   (newline)
   (yank))
 
+;; https://github.com/extremus/emacs-config/issues/2
 (defun my-void ()
-  "Do nothing. TODO: Find a built-in."
+  "Does nothing"
   (interactive))
 
 ;; http://www.emacswiki.org/emacs/dired-extension.el
@@ -326,6 +337,7 @@
   (interactive)
   (gnome-open-file (dired-get-file-for-visit)))
 
+;; https://github.com/extremus/emacs-config/issues/3
 (defun x-compose-key (seq)
   "External compose key"
   (interactive "M:")
@@ -365,10 +377,10 @@
                    (or (ffap-url-p filename)
                        (expand-file-name filename)))))
 
-(defun w3m-open-ffap ()
-  "Open file with w3m"
-  (interactive)
-  (w3m-find-file (ffap-prompter)))
+;; (defun w3m-open-ffap ()
+;;   "Open file with w3m"
+;;   (interactive)
+;;   (w3m-find-file (ffap-prompter)))
 
 ;; http://extremus79.ya.ru/replies.xml?item_no=1152
 (defun my-password-generator ()
@@ -465,7 +477,8 @@
           (setq deactivate-mark nil)
           (set-mark start)))))
 
-; Todo: Use current line when no region selected.
+;; Todo: use current line when no region selected.
+;; https://github.com/extremus/emacs-config/issues/4
 (defun move-region-up (start end n)
   "Move the current line up by N lines."
   (interactive "r\np")
@@ -490,63 +503,69 @@
   "Fullsize workaround"
   (shell-command-to-string "~/Dropbox/Script/fullsize-emacs.sh"))
 
-(global-set-key [(meta up)] 'move-region-up)
-(global-set-key [(meta down)] 'move-region-down)
-
 (global-set-key [(f3)] 'next-user-buffer)
 (global-set-key [(shift f3)] 'previous-user-buffer)
 (global-set-key [(f2)] 'save-buffer)
 (global-set-key [(control f4)] 'kill-buffer)
+
+(global-unset-key [(XF86LaunchA)]) ;; Apple keyboard F3 = Menu
+(global-unset-key [(XF86LaunchB)]) ;; Apple keyboard F4 = Win
 
 (global-unset-key [(menu)])
 
 (global-set-key [(menu) (w)] 'my-mark-current-word)
 (global-set-key [(menu) (l)] 'jao-copy-line)
 (global-set-key [(menu) (m)] 'my-mark-line)
-(global-set-key [(menu) (c)] 'cua-copy-region)
+(global-set-key [(menu) (e)] 'eshell)
+(global-set-key [(menu) (r)] 'term)
 (global-set-key [(menu) (d)] 'my-duplicate-line)
 (global-set-key [(menu) (j)] 'my-join-region)
-(global-set-key [(menu) (b)] 'w3m-open-ffap)
 (global-set-key [(menu) (f)] 'ffap)
-(global-set-key [(menu) (s)] 'speedbar) ;; todo: fix the speedbar
+(global-set-key [(menu) (s)] 'speedbar)
 (global-set-key [(menu) (t)] 'toggle-truncate-lines)
 (global-set-key [(menu) (n)] 'global-linum-mode)
 (global-set-key [(menu) (i)] 'ibuffer)
-(global-set-key [(menu) (e)] 'eshell)
 (global-set-key [(menu) (g)] 'gnome-open-ffap)
-(global-set-key [(menu) (o)] 'org-open-at-point-global)
 
 (global-set-key [(menu) (\ )] 'just-one-space)
+(global-set-key [(menu) (menu) (\ )] 'just-one-space)
 (global-set-key [(menu) (\\)] 'column-highlight-mode)
 (global-set-key [(menu) (\/)] 'imenu)
 (global-set-key [(menu) (Multi_key)] 'x-compose-key)
+(global-set-key [(menu) (tab)] 'menu-bar-mode)
+(global-set-key [(menu) (escape)] 'cua-cancel)
+(global-set-key [(menu) (backspace)] 'cua-cancel)
+(global-set-key [(menu) (,)] 'autopair-mode)
 
-(global-set-key [(menu) (menu) (\ )] 'menu-bar-mode)
+(global-set-key [(menu) (menu) (w)] 'whitespace-mode)
+(global-set-key [(menu) (menu) (tab)] 'menu-bar-open)
 (global-set-key [(menu) (menu) (p)] 'my-password-generator)
 (global-set-key [(menu) (menu) (t)] 'my-current-time)
 (global-set-key [(menu) (menu) (g)] 'grep-find)
 (global-set-key [(menu) (menu) (b)] 'w3m-goto-url)
-(global-set-key [(menu) (menu) (d)] 'dired-at-point)
 (global-set-key [(menu) (menu) (r)] 'revert-buffer)
 
-(global-set-key [(menu) (.) (.) (r)] 'rot13-region)
+(global-set-key [(menu) (menu) (x)] 'cua-cut-region)
+(global-set-key [(menu) (menu) (c)] 'cua-copy-region)
+(global-set-key [(menu) (menu) (v)] 'cua-paste)
+;; (global-set-key [(menu) (x)] 'cua-cut-region)
+;; (global-set-key [(menu) (c)] 'cua-copy-region)
+;; (global-set-key [(menu) (v)] 'cua-paste)
+;; (global-set-key [(menu) (control x)] 'cua-cut-region)
+;; (global-set-key [(menu) (control c)] 'cua-copy-region)
+;; (global-set-key [(menu) (control v)] 'cua-paste)
 
 (global-set-key [(menu) (.) (.) (w)] '(lambda () "Windows-1251" (interactive) (revert-buffer-with-coding-system 'cp1251-dos)))
 (global-set-key [(menu) (.) (.) (d)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-dos)))
 (global-set-key [(menu) (.) (.) (u)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-unix)))
 
-(global-set-key [(menu) (.) (.) (p)] 'autopair-mode)
 (global-set-key [(menu) (.) (.) (c)] 'clipper-create)
 (global-set-key [(menu) (.) (.) (i)] 'clipper-insert)
 (global-set-key [(menu) (.) (.) (e)] 'clipper-edit-clip)
-(global-set-key [(menu) (.) (.) (s)] 'orgstruct-mode)
-(global-set-key [(menu) (.) (.) (t)] 'orgtbl-mode)
-(global-set-key [(menu) (.) (r)] 'org-remember)
+(global-set-key [(menu) (.) (.) (r)] 'org-remember)
 
 (global-set-key [(menu) (.) (d)] '(lambda () "StarDict Console" (interactive) (comint-run "sdcv")))
 (global-set-key [(menu) (.) (f)] 'flymake-mode)
-(global-set-key [(menu) (.) (w)] 'whitespace-mode)
-
 (global-set-key [(menu) (.) (a)] 'artist-mode)
 (global-set-key [(menu) (.) (t)] 'text-mode)
 (global-set-key [(menu) (.) (h)] 'html-mode)
@@ -556,14 +575,18 @@
 (global-set-key [(menu) (.) (j)] 'js-mode)
 (global-set-key [(menu) (.) (o)] 'org-mode)
 
-(global-unset-key [(XF86LaunchA)]) ;; Apple keyboard F3 = Win + Menu
-(global-unset-key [(XF86LaunchB)]) ;; Apple keyboard F4 = Win
+(global-set-key [Multi_key] 'my-void)
+(global-set-key [(meta Multi_key)] 'my-void)
+(global-set-key [(control Multi_key)] 'my-void)
+(global-set-key [(shift Multi_key)] 'my-void)
 
 (global-unset-key [(super)])
-(global-set-key [Multi_key] 'my-void)
+
 (global-set-key [(super menu)] 'my-void)
 (global-set-key [(super f10)] 'my-void)
 (global-set-key [(super f11)] 'my-fullscreen)
+(global-set-key [(super escape)] 'menu-bar-mode)
+(global-set-key [(f4)] 'my-void)
 
 (global-set-key [(meta \ )] 'non-x-toggle-input-method)
 (global-set-key [(super \ )] 'cycle-input-method)
@@ -577,6 +600,9 @@
 (global-set-key [(shift super j)] 'shrink-window)
 (global-set-key [(shift super k)] 'enlarge-window)
 (global-set-key [(shift super l)] 'enlarge-window-horizontally)
+
+(global-set-key [(meta up)] 'move-region-up)
+(global-set-key [(meta down)] 'move-region-down)
 
 (global-set-key [(control z)] 'undo)
 (global-set-key [(meta w)] 'backward-kill-word)
