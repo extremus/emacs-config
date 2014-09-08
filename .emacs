@@ -1,12 +1,16 @@
 ;; https://github.com/extremus/emacs-config
 (custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(PC-meta-flag nil)
  '(TeX-DVI-via-PDFTeX t)
  '(TeX-PDF-mode t)
  '(TeX-source-specials-mode t)
  '(abbrev-mode nil)
  '(auto-save-default nil)
- '(autopair-autowrap t t)
+ '(electric-pair-mode t)
  '(bar-cursor-mode t nil (bar-cursor))
  '(blink-cursor-mode nil)
  '(bookmark-save-flag 1)
@@ -122,8 +126,6 @@
  '(org-support-shift-select t)
  '(org-yank-adjusted-subtrees t)
  '(partial-completion-mode nil)
- '(pgg-default-user-id "Sergey Mikhailov")
- '(pgg-gpg-recipient-argument "--remote-user")
  '(python-command "python" t)
  '(python-guess-indent nil)
  '(python-indent 4)
@@ -141,6 +143,7 @@
  '(ses-mode-hook (quote (lambda nil (set-variable (quote before-save-hook) nil t))))
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
+ '(size-indication-mode t)
  '(speedbar-indentation-width 4)
  '(speedbar-show-unknown-files t)
  '(speedbar-use-images t)
@@ -176,6 +179,10 @@
 
 ;; https://github.com/extremus/emacs-config/issues/1 ;; --color=never -nw
 (custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "#F0EAE4" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
  '(cursor ((t (:background "#71046B"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "#AE43AB"))))
@@ -213,8 +220,6 @@
 (require 'bookmark+)
 (require 'dired-x)
 (require 'dired+)
-(require 'autopair)
-(require 'auto-pair+)
 (require 'php-mode)
 
 (prefer-coding-system 'cp1251-dos)
@@ -230,7 +235,6 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'find-file-hook 'autopair-mode)
 (setq-default dired-omit-files-p t)
 (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 (toggle-dired-find-file-reuse-dir 1)
@@ -450,7 +454,7 @@
      	     (dired up)
      	     (dired-goto-file dir))))))
 
-;; Works normal with left alt + space only.
+;; Works ok with left_alt + space only.
 (defun non-x-toggle-input-method ()
   (interactive)
   (shell-command-to-string "~/Dropbox/Script/set-kb-ru.sh")
@@ -532,13 +536,12 @@
 (global-set-key [(menu) (\\)] 'column-highlight-mode)
 (global-set-key [(menu) (\/)] 'imenu)
 (global-set-key [(menu) (Multi_key)] 'x-compose-key)
-(global-set-key [(menu) (tab)] 'menu-bar-mode)
+(global-set-key [(menu) (menu) (tab)] 'menu-bar-mode)
 (global-set-key [(menu) (escape)] 'cua-cancel)
 (global-set-key [(menu) (backspace)] 'cua-cancel)
-(global-set-key [(menu) (,)] 'autopair-mode)
+(global-set-key [(menu) (,)] 'electric-pair-mode)
 
 (global-set-key [(menu) (menu) (w)] 'whitespace-mode)
-(global-set-key [(menu) (menu) (tab)] 'menu-bar-open)
 (global-set-key [(menu) (menu) (p)] 'my-password-generator)
 (global-set-key [(menu) (menu) (t)] 'my-current-time)
 (global-set-key [(menu) (menu) (g)] 'grep-find)
@@ -548,12 +551,9 @@
 (global-set-key [(menu) (menu) (x)] 'cua-cut-region)
 (global-set-key [(menu) (menu) (c)] 'cua-copy-region)
 (global-set-key [(menu) (menu) (v)] 'cua-paste)
-;; (global-set-key [(menu) (x)] 'cua-cut-region)
-;; (global-set-key [(menu) (c)] 'cua-copy-region)
-;; (global-set-key [(menu) (v)] 'cua-paste)
-;; (global-set-key [(menu) (control x)] 'cua-cut-region)
-;; (global-set-key [(menu) (control c)] 'cua-copy-region)
-;; (global-set-key [(menu) (control v)] 'cua-paste)
+(global-set-key [(menu) (x)] 'cua-cut-region)
+(global-set-key [(menu) (c)] 'cua-copy-region)
+(global-set-key [(menu) (v)] 'cua-paste)
 
 (global-set-key [(menu) (.) (.) (w)] '(lambda () "Windows-1251" (interactive) (revert-buffer-with-coding-system 'cp1251-dos)))
 (global-set-key [(menu) (.) (.) (d)] '(lambda () "UTF-8" (interactive) (revert-buffer-with-coding-system 'utf-8-dos)))
