@@ -381,11 +381,6 @@
                    (or (ffap-url-p filename)
                        (expand-file-name filename)))))
 
-;; (defun w3m-open-ffap ()
-;;   "Open file with w3m"
-;;   (interactive)
-;;   (w3m-find-file (ffap-prompter)))
-
 ;; http://extremus79.ya.ru/replies.xml?item_no=1152
 (defun my-password-generator ()
   "Random password generator."
@@ -539,7 +534,7 @@
 (global-set-key [(menu) (menu) (tab)] 'menu-bar-mode)
 (global-set-key [(menu) (escape)] 'cua-cancel)
 (global-set-key [(menu) (backspace)] 'cua-cancel)
-(global-set-key [(menu) (,)] 'electric-pair-mode)
+(global-set-key [(menu) (\,)] 'electric-pair-mode)
 
 (global-set-key [(menu) (menu) (w)] 'whitespace-mode)
 (global-set-key [(menu) (menu) (p)] 'my-password-generator)
